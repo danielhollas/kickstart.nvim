@@ -183,10 +183,6 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Debugging ruff issue https://github.com/astral-sh/ruff/issues/11545
--- vim.lsp.set_log_level(vim.lsp.log_levels.DEBUG)
--- require('vim.lsp.log').set_format_func(vim.inspect)
-
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -537,6 +533,7 @@ require('lazy').setup({
         end,
       })
 
+      -- DH: I had this commented out, but not sure why
       vim.api.nvim_create_autocmd('LspDetach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
         callback = function(event)
@@ -633,8 +630,7 @@ require('lazy').setup({
       format_on_save = false,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        -- python = { "ruff" },
       },
     },
   },
